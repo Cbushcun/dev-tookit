@@ -7,7 +7,6 @@ Most directories will have a README to provide further explanation within the re
 # File Tree
 
 ```
-.
 ├── .gitignore
 ├── README.md
 └── python/
