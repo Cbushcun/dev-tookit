@@ -1,6 +1,6 @@
 # What this repo is
 
-A collection of code snippets stored here for future referenceing and sharing. Snippets are either made to achieve a function without building an entire application around it or they are submissions for online courses I've taken to work on my skills. Due to this being a 'playground' of sorts, the structure of the files are intended to promote inter-repo reuse, so exporting of any code may require more code than what is within the snippets.
+A collection of code snippets stored here for future referenceing and sharing. Snippets are either made to achieve some function without building an entire application around it or they are submissions for online courses I've taken to work on my skills. Due to this being a 'playground' of sorts, the structure of the files are intended to promote inter-repo reuse, so exporting of any code may require more code than what is within the snippets.
 
 Most directories will have a README to provide further explanation within the repo.
 
