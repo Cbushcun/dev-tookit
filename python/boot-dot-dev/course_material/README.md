@@ -8,9 +8,9 @@ Each folder is a named after a Chapter and a Lesson within the course, followed 
 
 # Relevant Links & Extra Information
 
-- [Boot.dev Website](https://www.boot.dev/)
-- [User Profile](https://www.boot.dev/u/cbushcun)
+[Boot.dev Website](https://www.boot.dev/)
+[User Profile](https://www.boot.dev/u/cbushcun)
 
 ## Completed/In-Progress Courses
 
-- [Boot.dev Back-End Developer Course (Python) — In-Progress](https://www.boot.dev/paths/backend?tech=python-golang)
+[Boot.dev Back-End Developer Course (Python) — In-Progress](https://www.boot.dev/paths/backend?tech=python-golang)
