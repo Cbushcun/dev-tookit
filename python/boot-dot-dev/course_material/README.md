@@ -1,6 +1,6 @@
 # Whats in here
 
-This is a directory dedicated to snippets from assignments taken through boot.dev backend engineer course. Basic assignments and quiz questions are omitted from this repo. The aim of this directory is to provide external context and understanding on the material I have worked with.
+This is a directory dedicated to snippets from assignments taken through boot.dev backend engineer course. Some basic assignments and all quizzes are omitted from this repo. The aim of this directory is to provide external context and understanding on the material I have worked with.
 
 # How it's Structured
 
