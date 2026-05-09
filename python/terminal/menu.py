@@ -5,6 +5,19 @@ from .util import clear_terminal, get_terminal_dimensions
 import time
 import math
 
+class TerminalMenu:
+    def __init__(self) -> None:
+        pass
+    def __get_terminal_dimensions(self):
+        pass
+    def __render_data(self):
+        pass
+    def display_menu(self):
+        pass
+    def display_data_columns(self):
+        pass
+    def clear_screen(self):
+        pass
 
 
 def display_menu(
@@ -56,22 +69,6 @@ def display_column_list(
     Returns:
         None
     """  
-    if not list_items:
-        return
-    
-    clear_terminal()
-    terminal_width, terminal_height = get_terminal_dimensions()
-    row_count = terminal_height - 3
-    col_count = max(1, terminal_width // spacing)
-    if row_count < 1:
-        row_count = 1
-    total_items = len(list_items)
-    max_items_per_page = col_count * row_count
-    if max_items_per_page > total_items:
-        total_pages = 1
-    else:
-        total_pages = math.ceil(total_items / max_items_per_page)
-    
     def render_page(page_num):
         """
         Renders a single page of the list items based on the current page number and terminal dimensions.
@@ -97,7 +94,22 @@ def display_column_list(
             row_items = [item for item in row if item]
             if row_items:
                 print("".join(f"{item:<{spacing}}" for item in row_items))
-        return page_num 
+        return page_num
+    
+    if not list_items:
+        return
+    clear_terminal()
+    terminal_width, terminal_height = get_terminal_dimensions()
+    row_count = terminal_height - 3
+    col_count = max(1, terminal_width // spacing)
+    if row_count < 1:
+        row_count = 1
+    total_items = len(list_items)
+    max_items_per_page = col_count * row_count
+    if max_items_per_page > total_items:
+        total_pages = 1
+    else:
+        total_pages = math.ceil(total_items / max_items_per_page)
     current_page = 0
     running = True
     while running:
