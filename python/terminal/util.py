@@ -2,20 +2,17 @@ import os
 import subprocess
 import shutil
 
-def clear_terminal():
+def clear_terminal() -> None:
     if os.name == 'posix':
         subprocess.run('clear')
     else:
         subprocess.system('cls')
 
-def get_terminal_dimensions():
+def get_terminal_dimensions() -> list[int]:
     """
-    Gets the dimentions of the terminal and returns an array of two integers represening the length and width of the terminal in columns and lines.
+    Retrieves the current terminal dimensions (width and height) using shutil.get_terminal_size.
+    Returns:
+        list[int]: A list containing the terminal width and height as integers.
     """
-    try:
-        dimentions = shutil.get_terminal_size((80, 24))
-        return [dimentions.columns, dimentions.lines]
-        
-    except Exception as e:
-        print("Error: get_terminal_dimensions failure")
-        
+    dimentions = shutil.get_terminal_size((80, 24))
+    return [dimentions.columns, dimentions.lines]

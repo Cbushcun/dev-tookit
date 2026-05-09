@@ -5,14 +5,17 @@ from .util import clear_terminal, get_terminal_dimensions
 import time
 import math
 
+
+
 def display_menu(
     options: list[str] = ["Option 1", "Option 2", "Option 3"]
-    ):
+    ) -> int:
     """
-    Displays a menu in the terminal with the given options. Returns the index of the selected option (int).
-     - options: A list of strings representing the menu options.
-     - Returns: The index of the selected option (int) with 0 representing the exit option.
-     - Note: The menu will continue to display until a valid option is selected or the user chooses to exit by entering 0.
+    Displays a menu in the terminal with the given options and prompts the user to select one. The user can also choose to exit the menu by selecting 0. The function will continue to prompt the user until a valid selection is made.
+    Args:
+        options (list[str]): A list of strings representing the menu options. Default is ["Option 1", "Option 2", "Option 3"].
+    Returns:
+        choice (int): The index of the user's selected option. Returns 0 if the user chooses to exit.
     """
     while True:
         clear_terminal()
@@ -20,7 +23,6 @@ def display_menu(
         for i, option in enumerate(options, 1):
             print(f"{i}. {option}")
         print("0. Exit")
-        
         try:
             choice: int = int(input(f"\nEnter your choice (0-{len(options)}): "))
             if choice == 0:
@@ -33,35 +35,36 @@ def display_menu(
                 clear_terminal()
                 print(f"Invalid selection. Please choose any number from 0 to {len(options)}.")
                 time.sleep(2)
-                
         except ValueError:
             clear_terminal()
             print("Invalid input. Please enter a number.")
             time.sleep(2)
 
+
+
 def display_column_list(
     list_items: list[str],
     enumerate_items: bool = False,
     spacing: int = 20
-    ) -> int:
+    ) -> int | None:
     """
-    Takes in a list of items and a defined number of columns to print a list in the terminal in column-major order (in order from top to bottom, left to right). Returns the current page number (int).
-     - list_items: A list of strings representing the items to be displayed.
-     - enumerate_items: A boolean indicating whether to enumerate the items in the list (default is False). If True, each item will be prefixed with its index in the list (starting from 1) followed by a period and a space (e.g., "001. Item Name").
-     - spacing: An integer representing the width of each column (default is 20).
-    """
-    
+    Displays a list of items in a column format based on the terminal dimensions. The user can navigate through the pages of the list using ',' and '.' keys, and can exit the display by pressing 'q'.
+    Args:
+        list_items (list[str]): A list of strings representing the items to be displayed.
+        enumerate_items (bool): Whether to enumerate the items in the list. Default is False.
+        spacing (int): The number of spaces between columns. Default is 20.
+    Returns:
+        None
+    """  
     if not list_items:
         return
-
+    
     clear_terminal()
     terminal_width, terminal_height = get_terminal_dimensions()
     row_count = terminal_height - 3
     col_count = max(1, terminal_width // spacing)
-
     if row_count < 1:
         row_count = 1
-            
     total_items = len(list_items)
     max_items_per_page = col_count * row_count
     if max_items_per_page > total_items:
@@ -71,14 +74,16 @@ def display_column_list(
     
     def render_page(page_num):
         """
-        Renders the list based off of the terminal dimentions. Returns the current page number (int).
+        Renders a single page of the list items based on the current page number and terminal dimensions.
+        Args:
+            page_num (int): The current page number to be rendered.
+        Returns:
+            page_num (int): The current page number after rendering.
         """
         start_index = page_num * max_items_per_page
         end_index = min(start_index + max_items_per_page, total_items)
         page_items = list_items[start_index:end_index]
-        
         grid = [['' for _ in range(col_count)] for _ in range(row_count)]
-        
         index = 0
         for col in range(col_count):
             for row in range(row_count):
@@ -87,18 +92,14 @@ def display_column_list(
                         grid[row][col] = f"{start_index + index + 1:03d}" + ". " + page_items[index]
                     else:
                         grid[row][col] = page_items[index]
-                    index += 1
-        
+                    index += 1 
         for row in grid:
             row_items = [item for item in row if item]
             if row_items:
                 print("".join(f"{item:<{spacing}}" for item in row_items))
-    
         return page_num 
-
     current_page = 0
     running = True
-    
     while running:
         clear_terminal()
         current_page = render_page(current_page)
@@ -115,8 +116,7 @@ def display_column_list(
                 elif key.lower() == '.':
                     current_page += 1
                     if current_page > total_pages - 1:
-                        current_page = 0
-                        
+                        current_page = 0     
             except Exception as e:
                 print("Error: display_column_list failure")
                 time.sleep(2)
